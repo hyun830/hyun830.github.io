@@ -10,6 +10,26 @@
     >
       <div class="work-modal-content">
         <button
+          class="work-modal-switch work-modal-switch-prev"
+          type="button"
+          aria-label="前のタブ"
+          :disabled="!canNavigateTabs"
+          @click.stop="prevTab"
+        >
+          &#8592;
+        </button>
+
+        <button
+          class="work-modal-switch work-modal-switch-next"
+          type="button"
+          aria-label="次のタブ"
+          :disabled="!canNavigateTabs"
+          @click.stop="nextTab"
+        >
+          &#8594;
+        </button>
+
+        <button
           class="work-modal-close"
           type="button"
           aria-label="閉じる"
@@ -25,20 +45,70 @@
             loading="lazy"
           />
           <h3 class="work-modal-title">{{ work.name }}</h3>
-          <div class="work-modal-role">{{ work.info }}</div>
+          <div class="work-modal-role" v-if="work.info">
+            <template v-if="work.infoLabel">
+              <span class="work-modal-role-label">{{ work.infoLabel }}</span>
+              <span class="work-modal-role-text">{{ work.info }}</span>
+            </template>
+            <template v-else>
+              {{ work.info }}
+            </template>
+          </div>
           <p
             v-if="work.description"
             class="work-modal-description"
             v-html="work.description"
           ></p>
         </div>
-        <div v-else class="work-modal-body">
+        <div v-else-if="activeTab === 1" class="work-modal-body work-modal-body-details">
           <h3 class="work-modal-title">{{ work.name }}</h3>
-          <div class="work-modal-role">{{ work.info }}</div>
+          <div class="work-modal-role" v-if="work.info">
+            <template v-if="work.infoLabel">
+              <span class="work-modal-role-label">{{ work.infoLabel }}</span>
+              <span class="work-modal-role-text">{{ work.info }}</span>
+            </template>
+            <template v-else>
+              {{ work.info }}
+            </template>
+          </div>
+          <h4 class="work-modal-subtitle">{{ work.detailsLabel || "Details" }}</h4>
           <div
+            v-if="!work.suppressDetailsContent"
             class="work-modal-description"
             v-html="renderDetails(work)"
           ></div>
+          <div v-if="work.externalLink" class="work-modal-external">
+            <a
+              class="work-modal-external-link"
+              :href="work.externalLink.url"
+              target="_blank"
+              rel="noopener"
+            >
+              {{ work.externalLink.text || "詳しく見る" }}
+            </a>
+          </div>
+        </div>
+        <div v-else class="work-modal-body work-modal-body-details">
+          <h3 class="work-modal-title">{{ work.name }}</h3>
+          <div class="work-modal-role" v-if="work.info">
+            <template v-if="work.infoLabel">
+              <span class="work-modal-role-label">{{ work.infoLabel }}</span>
+              <span class="work-modal-role-text">{{ work.info }}</span>
+            </template>
+            <template v-else>
+              {{ work.info }}
+            </template>
+          </div>
+          <template v-if="work.tech">
+            <h4 class="work-modal-subtitle">開発スタック</h4>
+            <div
+              class="work-modal-description"
+              v-html="work.tech"
+            ></div>
+          </template>
+          <div v-else class="work-modal-description work-modal-description-empty">
+            <em>※準備中</em>
+          </div>
         </div>
         <div class="work-modal-tabs" role="tablist" aria-label="プロジェクト詳細表示切替">
           <button
@@ -83,6 +153,7 @@ export default {
       tabs: [
         { value: 0, label: "概要タブ" },
         { value: 1, label: "詳細タブ" },
+        { value: 2, label: "Techタブ" },
       ],
     };
   },
@@ -97,6 +168,9 @@ export default {
         window.removeEventListener("keydown", this.onKeydown);
       }
     },
+    work() {
+      this.activeTab = 0;
+    },
   },
   mounted() {
     if (this.open) {
@@ -107,10 +181,18 @@ export default {
   },
   computed: {
     displayTabs() {
-      if (this.work?.details) {
-        return this.tabs;
+      const tabs = [this.tabs[0]];
+      if (this.work?.details || this.work?.description) {
+        tabs.push(this.tabs[1]);
       }
-      return [this.tabs[0]];
+      tabs.push(this.tabs[2]);
+      return tabs;
+    },
+    tabCount() {
+      return this.displayTabs.length;
+    },
+    canNavigateTabs() {
+      return this.tabCount > 1;
     },
   },
   beforeUnmount() {
@@ -122,14 +204,25 @@ export default {
       this.activeTab = 0;
       this.$emit("close");
     },
+    prevTab() {
+      if (!this.canNavigateTabs) return;
+      this.activeTab = (this.activeTab - 1 + this.tabCount) % this.tabCount;
+    },
+    nextTab() {
+      if (!this.canNavigateTabs) return;
+      this.activeTab = (this.activeTab + 1) % this.tabCount;
+    },
     setTab(value) {
       if (this.activeTab === value) return;
-      if (value === 1 && !this.work?.details && !this.work?.description) return;
       this.activeTab = value;
     },
     onKeydown(event) {
       if (event.key === "Escape") {
         this.handleClose();
+      } else if (event.key === "ArrowLeft") {
+        this.prevTab();
+      } else if (event.key === "ArrowRight") {
+        this.nextTab();
       }
     },
     lockScroll() {
@@ -139,6 +232,9 @@ export default {
       document.body.style.overflow = "";
     },
     renderDetails(work) {
+      if (work.suppressDetailsContent) {
+        return "";
+      }
       const details = work.details || "";
       const extra = work.extra ? `<strong>【詳細実績】</strong><br>${work.extra.replace(/\n/g, "<br>")}` : "";
       if (details && extra) {
@@ -229,15 +325,72 @@ export default {
   margin-bottom: 16px;
 }
 
+.work-modal-role-label {
+  display: inline-block;
+  margin-right: 8px;
+  font-weight: 700;
+  color: #355c7d;
+}
+
+.work-modal-role-text {
+  color: #1ca9e3;
+}
+
+.work-modal-external {
+  margin-top: 20px;
+}
+
+.work-modal-external-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  color: #1a73e8;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(26, 115, 232, 0.4);
+  padding-bottom: 2px;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.work-modal-external-link::after {
+  content: "↗";
+  font-size: 0.9em;
+}
+
+.work-modal-external-link:hover {
+  color: #0b57d0;
+  border-color: rgba(11, 87, 208, 0.7);
+}
+
+.work-modal-subtitle {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  letter-spacing: 0.04em;
+  color: #2c3e50;
+}
+
 .work-modal-description {
   line-height: 1.75;
   color: #4a4a4a;
-  max-height: 120px;
-  overflow-y: auto;
+  max-height: none;
+  overflow-y: visible;
+}
+
+.work-modal-description-empty {
+  min-height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #7f8c8d;
 }
 
 .work-modal-body {
   text-align: left;
+}
+
+.work-modal-body-details {
+  min-height: 260px;
 }
 
 .work-modal-tabs {
@@ -266,6 +419,54 @@ export default {
 .work-modal-tab-button.is-active {
   color: #1ca9e3;
   transform: scale(1.05);
+}
+
+.work-modal-switch {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 42px;
+  height: 42px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(28, 169, 227, 0.12);
+  color: #1ca9e3;
+  font-size: 1.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.work-modal-switch:disabled {
+  cursor: not-allowed;
+  opacity: 0.3;
+}
+
+.work-modal-switch:not(:disabled):hover,
+.work-modal-switch:not(:disabled):focus-visible {
+  background: rgba(28, 169, 227, 0.24);
+  transform: translateY(-50%) scale(1.05);
+  outline: none;
+}
+
+.work-modal-switch-prev {
+  left: 12px;
+}
+
+.work-modal-switch-next {
+  right: 12px;
+}
+
+@media (max-width: 900px) {
+  .work-modal-switch-prev {
+    left: 8px;
+  }
+
+  .work-modal-switch-next {
+    right: 8px;
+  }
 }
 
 @media (max-width: 640px) {

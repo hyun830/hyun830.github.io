@@ -210,7 +210,18 @@ export default {
           description:
             "法人向けに光回線・閉域網・クラウド接続・モバイル通信など多様なネットワークサービスをワンストップで提供し、高速・高可用・高セキュリティな通信環境を実現するシステムの保守・開発を担当していました。",
           details:
-            "・AWS/Azure 環境の運用改善とパフォーマンスチューニング<br>・CloudWatch/Grafana を用いた監視強化とアラート設計<br>・CI/CD パイプライン整備によるリリースの自動化<br>・顧客折衝を通じた課題抽出とロードマップ策定<br>・各種ネットワーク機器（ルータ等）の管理機能や複数プラットフォームの監視データ可視化機能の追加開発<br>・新機能開発、既存機能改修、リファクタリング、テスト整備など開発〜運用まで一貫対応<br>・ミドルウェアのEOL/脆弱性リスクをチームリーダーへ報告し、対応を推進<br>・不足していたプラットフォーム資料や手順書の整備により情報共有を強化",
+            "・各種ネットワーク機器（ルータ等）の管理機能や複数プラットフォームから取得したパラメータ情報の可視化・表示機能を開発<br>・新規機能の追加、既存機能の改修、リファクタリング、テスト整備など、開発から保守運用まで一貫して対応<br>・ミドルウェアのEOL（サポート終了）や脆弱性などのリスクをチームリーダーへ報告し、対応を推進<br>・ドキュメントが不足しているプラットフォームについて、資料作成や手順書整備を実施し、チーム内の情報共有を強化<br>・上記に関連する各機能の実装および改修を担当",
+          tech:
+            "<strong style=\"font-size:1.08em;\">■ 使用言語</strong><br>　Ruby（main）、TypeScript、PHP<br><br>" +
+            "<strong style=\"font-size:1.08em;\">■ 環境</strong><br>　Linux／PostgreSQL<br><br>" +
+            "<strong style=\"font-size:1.08em;\">■ フレームワーク</strong><br>　Ruby on Rails<br><br>" +
+            "<strong style=\"font-size:1.08em;\">■ バージョン管理</strong><br>　GitLab<br><br>" +
+            "<strong style=\"font-size:1.08em;\">■ インフラ</strong><br>　AWS（EC2、S3、RDS、VPC、CloudWatch、etc...）<br><br>" +
+            "<strong style=\"font-size:1.08em;\">■ CI/CD</strong><br>　GitLab CI/CD<br><br>" +
+            "<strong style=\"font-size:1.08em;\">■ サーバ監視</strong><br>　CloudWatch、Zabbix<br><br>" +
+            "<strong style=\"font-size:1.08em;\">■ コミュニケーションツール</strong><br>　Slack、Microsoft Teams<br><br>" +
+            "<strong style=\"font-size:1.08em;\">■ ドキュメント管理</strong><br>　Redmine、SharePoint<br><br>" +
+            "<strong style=\"font-size:1.08em;\">■ 課題管理（BTS）</strong><br>　Redmine",
         },
         {
           name: "交通系ICカードシステム保守",
@@ -219,7 +230,31 @@ export default {
           description:
             "約500万人が利用する交通系ICカードの端末および交通関連システム向けプラットフォーム（FP）を提供するサービスの保守・運用を担当し、システムの安定稼働と品質維持に取り組んでいました。",
           details:
-            "・オンプレミス環境での Zabbix 監視とログ活用による障害原因追跡<br>・バッチ処理の安定化とリトライ機構の導入<br>・保守チーム向け手順書の整備と教育資料の作成<br>・月次運用レポートの自動化による作業時間の削減",
+            "<strong style=\"font-size:1.08em;\">ミドルウェア／ファームウェアのアップデートおよび性能改善</strong><br>" +
+            "・各ミドルウェア・ファームウェアのリリースノートを基に机上調査を実施し、FP・IC端末が最新安定版を利用しているかを確認<br>" +
+            "・古いバージョン使用時は安定版へのアップデートを検討・実施し、非推奨メソッドや不適切なコーディング箇所を精査・修正<br>" +
+            "・新機能追加時には適用可否の検討および技術報告書の作成を担当<br>" +
+            "・保守・運用側で対応可能な修正は直接実施し、開発完了後に JUnit による単体テストを実施<br>" +
+            "・全FP・IC端末を対象に JMeter による高負荷テストおよび Jenkins によるリグレッションテストを実施<br>" +
+            "・Pythonツールを用いてテスト結果を可視化・分析し、レポートとして報告<br><br>" +
+            "<strong style=\"font-size:1.08em;\">脆弱性調査および対応</strong><br>" +
+            "・NVD／JVN／CVEなどの脆弱性情報を収集・要約し、交通系ICカード端末およびFPへの影響を調査<br>" +
+            "・使用中の全ライブラリについてソースコードレベルで影響有無を確認<br>" +
+            "・影響がある場合は修正箇所・影響範囲・危険性を明確化し、代替ライブラリや安全なメソッドを提示した修正案を作成<br>" +
+            "・上層部承認後、該当箇所のソースコード修正を保守・運用側で実施",
+          tech:
+            "<strong style=\"font-size:1.08em;\">■ 使用言語</strong><br>　Java<br><br>" +
+            "<strong style=\"font-size:1.08em;\">■ 環境</strong><br>　Linux／MySQL・MariaDB<br><br>" +
+            "<strong style=\"font-size:1.08em;\">■ フレームワーク</strong><br>　Spring Framework<br><br>" +
+            "<strong style=\"font-size:1.08em;\">■ バージョン管理</strong><br>　Subversion（SVN）<br><br>" +
+            "<strong style=\"font-size:1.08em;\">■ インフラ／Webサーバ</strong><br>　Apache HTTP Server<br><br>" +
+            "<strong style=\"font-size:1.08em;\">■ アプリケーションサーバ</strong><br>　Apache Tomcat<br><br>" +
+            "<strong style=\"font-size:1.08em;\">■ CI／ビルド管理</strong><br>　Apache Maven<br><br>" +
+            "<strong style=\"font-size:1.08em;\">■ サーバ監視／管理</strong><br>　Tomcat Manager<br><br>" +
+            "<strong style=\"font-size:1.08em;\">■ テスト</strong><br>　JUnit（単体テスト）、JMeter（負荷テスト）<br><br>" +
+            "<strong style=\"font-size:1.08em;\">■ コミュニケーションツール</strong><br>　Slack<br><br>" +
+            "<strong style=\"font-size:1.08em;\">■ ドキュメント管理</strong><br>　Redmine（Wiki機能利用）<br><br>" +
+            "<strong style=\"font-size:1.08em;\">■ 課題管理（BTS）</strong><br>　Redmine",
         },
         {
           name: "車両診断システム向けグラフライブラリ開発",
@@ -228,16 +263,81 @@ export default {
           description:
             "自動車メーカー向け車両診断システム（OBD2ツール）のクラウド化プロジェクトにて、グラフライブラリの設計・開発を担当。要件定義からテストまで一貫して携わり、リアルタイム・履歴データの描画や設定機能を実装しました。",
           details:
-            "・D3.js/Chart.js を組み合わせたカスタムチャートの設計と実装<br>・数十万件規模のデータ描画を想定した仮想スクロール最適化<br>・現場からのフィードバックを踏まえた UI/UX 改善の継続<br>・Vue.js + TypeScript によるコンポーネント設計とテスト整備",
+            "<strong style=\"font-size:1.08em;\">要件定義</strong><br>" +
+            "・お客様へのヒアリングを通じて利用シーンを把握し、機能要件（UI構成・画面設計）および非機能要件（ライセンス・データ保持・耐久性）を定義<br>" +
+            "・要件定義書およびシーケンス図を作成し、レビューやデモプログラムを通じて合意形成を実施<br><br>" +
+            "<strong style=\"font-size:1.08em;\">基本設計</strong><br>" +
+            "・アーキテクチャ方針および進行ルールを策定し、WBSを用いて工数と要員を見積もり<br>" +
+            "・Vue.js・Chart.js・Rubyを組み合わせたツール構成を採用し、ライセンス運用基準を定義<br>" +
+            "・主要機能（グラフ生成・描画・設定・UI/UX）を整理し、クラス図・データフロー図を作成<br><br>" +
+            "<strong style=\"font-size:1.08em;\">詳細設計</strong><br>" +
+            "・システム全体を複数モジュールに分割し、役割と連携方法を明確化<br>" +
+            "・データ取得・整形モジュールをRubyで実装し、正規化・補間・集約ロジック、タイムゾーン処理を定義<br>" +
+            "・通知モジュールではObserverパターンを採用し、Subject／Observerの関係およびイベント種別を整理してリアルタイム更新を実現<br>" +
+            "・Vue.jsコンポーネントとChart.jsラッパを組み合わせた描画モジュールを設計し、グラフ種別・凡例・軸スケール・描画手順（Observer → Vue → Chart.js）を詳細化<br>" +
+            "・API入出力のJSONスキーマ、イベントペイロード、更新間隔・閾値を定義し、モジュール間の連携仕様を明確化<br>" +
+            "・状態管理・エラー設計ではリトライ、タイムアウト、フォールバック処理、ログ出力、監視項目を定義し、安定稼働を考慮<br>" +
+            "・環境依存項目（APIエンドポイント、更新周期、閾値、ライセンス表記など）を設定可能とし、環境ごとの柔軟な運用に対応<br>" +
+            "・欠損データやスパイク、長時間稼働時の性能劣化を想定したテスト観点を整理し、信頼性を重視した設計を実施<br><br>" +
+            "<strong style=\"font-size:1.08em;\">開発</strong><br>" +
+            "・基本設計・詳細設計をもとに各モジュールを実装<br>" +
+            "・Rubyによるデータ取得・整形処理を開発し、正規化・補間・集約ロジックを反映してリアルタイム性と精度を両立<br>" +
+            "・Subject／Observer間のイベント通知処理を実装し、リアルタイム更新を実現<br>" +
+            "・Vue.jsでグラフ描画・設定・UI/UX機能を構築し、Chart.jsと連携して多様なグラフ表示を実現<br><br>" +
+            "<strong style=\"font-size:1.08em;\">テスト</strong><br>" +
+            "・Jestを用いた単体テストを実施し、VueコンポーネントおよびChart.jsラッパのテスト項目（描画成否、軸スケール変更、凡例表示、イベント発火、エラーハンドリング）を作成<br>" +
+            "・APIレスポンスをモック化し（JSONスキーマ準拠）、Observerイベントから描画完了までのフローを検証<br>" +
+            "・JMeterを用いた長時間耐久テストを実施し、メモリリーク・CPU使用率・描画FPS・UI応答性（ズーム／パン）を監視<br>" +
+            "・更新周期継続時の蓄積誤差やしきい値超過時の挙動を確認し、安定性を検証<br><br>" +
+            "<strong style=\"font-size:1.08em;\">その他</strong><br>" +
+            "・ユーザマニュアルを作成し、機能説明および操作手順を整理・共有",
+          tech:
+            "<strong style=\"font-size:1.08em;\">■ 使用言語</strong><br>　TypeScript（メイン）、Ruby<br><br>" +
+            "<strong style=\"font-size:1.08em;\">■ 環境</strong><br>　Windows<br><br>" +
+            "<strong style=\"font-size:1.08em;\">■ フレームワーク</strong><br>　Vue.js<br><br>" +
+            "<strong style=\"font-size:1.08em;\">■ バージョン管理</strong><br>　GitLab<br><br>" +
+            "<strong style=\"font-size:1.08em;\">■ アプリケーションサーバ</strong><br>　Node.js<br><br>" +
+            "<strong style=\"font-size:1.08em;\">■ CI／ビルド管理</strong><br>　GitLab CI／npm<br><br>" +
+            "<strong style=\"font-size:1.08em;\">■ テスト</strong><br>　Jest<br><br>" +
+            "<strong style=\"font-size:1.08em;\">■ コミュニケーションツール</strong><br>　Slack<br><br>" +
+            "<strong style=\"font-size:1.08em;\">■ ドキュメント管理</strong><br>　GitLab Wiki<br><br>" +
+            "<strong style=\"font-size:1.08em;\">■ 課題管理（BTS）</strong><br>　GitLab Issues",
         },
         {
           name: "SFA & 業務システム保守・開発",
           info: "Software Engineer",
           img: "img/sfa_system.png",
           description:
-            "通信事業者向けに提供される法人ネットワーク管理ポータルシステムおよび社内営業支援システムの2つのシステムについて、開発・保守を並行して担当していました。",
+            "通信事業者向けに提供される法人ネットワーク管理ポータルシステムおよび社内営業支援システム（SFA、Sales Force Automation)の2つのシステムについて、開発・保守を並行して担当していました。",
           details:
-            "・Salesforce/kintone などの SaaS 連携によるワークフロー自動化<br>・ユーザー部門ヒアリングを基にした改善提案と実装<br>・AngularJS から Vue.js への段階的マイグレーション支援<br>・運用マニュアル整備とユーザートレーニングの実施",
+            "・お客様の要望通り画面、バッグエンド処理を実装する",
+          tech:
+            "<strong style=\"font-size:1.08em;\">■ 使用言語</strong><br>　Ruby（メイン）、TypeScript<br><br>" +
+            "<strong style=\"font-size:1.08em;\">■ 環境</strong><br>　Windows<br><br>" +
+            "<strong style=\"font-size:1.08em;\">■ フレームワーク</strong><br>　Ruby on Rails／Vue.js<br><br>" +
+            "<strong style=\"font-size:1.08em;\">■ バージョン管理</strong><br>　GitLab<br><br>" +
+            "<strong style=\"font-size:1.08em;\">■ インフラ</strong><br>　AWS（EC2、S3、RDS、CloudWatch など）<br><br>" +
+            "<strong style=\"font-size:1.08em;\">■ CI／CD</strong><br>　GitLab CI／CD<br><br>" +
+            "<strong style=\"font-size:1.08em;\">■ サーバ監視</strong><br>　Amazon CloudWatch<br><br>" +
+            "<strong style=\"font-size:1.08em;\">■ コミュニケーションツール</strong><br>　Slack／Microsoft Teams<br><br>" +
+            "<strong style=\"font-size:1.08em;\">■ ドキュメント管理</strong><br>　GitLab Wiki／SharePoint<br><br>" +
+            "<strong style=\"font-size:1.08em;\">■ 課題管理（BTS）</strong><br>　GitLab Issues",
+        },
+        {
+          name: "その他",
+          info: "Blog, Personal Projects、etc",
+          hideOverviewInfo: true,
+          img: "img/etc.png",
+          description:
+            "ブログや小規模の個人プロジェクト、技術ナレッジの発信を通じて、自己学習と知識共有に取り組んでいます。",
+          detailsLabel: "ブログ",
+          details:
+            "・Nuxt.js/Next.js を用いた技術ブログの制作とコンテンツ更新\n・小規模なAPIサーバーやCLIツール開発による技術検証\n・最新のフロントエンド/インフラ技術を取り入れたPoC作成\n・情報発信とアウトプットを通じた知識の定着と共有",
+          suppressDetailsContent: true,
+          externalLink: {
+            url: "https://qiita.com/ehthkdia4007",
+            text: "HYUN SEUNGYUNのQiitaの記事を見る",
+          },
         },
       ],
       skillCategories: [
@@ -316,6 +416,7 @@ export default {
       ],
       selectedWork: null,
       isWorkModalOpen: false,
+      selectedWorkIndex: null,
     };
   },
   methods: {
